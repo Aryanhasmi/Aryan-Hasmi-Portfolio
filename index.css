@@ -1253,4 +1253,8 @@ body {
     .certs-grid {
         grid-template-columns: 1fr;
     }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
 }
