@@ -24,17 +24,30 @@ const AntigravityBackground: React.FC = () => {
         setCanvasSize();
         window.addEventListener('resize', setCanvasSize);
 
-        // Track Mouse
-        const handleMouseMove = (e: MouseEvent) => {
-            mouseParams.current.x = e.clientX;
-            mouseParams.current.y = e.clientY;
+        // Track Mouse & Touch
+        const handleMouseMove = (e: MouseEvent | TouchEvent) => {
+            let clientX, clientY;
+            if (e instanceof TouchEvent) {
+                // Prevent scrolling when touching the background if pointerEvents allows it
+                // Note: pointer-events is 'none' on canvas, so we might need to listen on window
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            mouseParams.current.x = clientX;
+            mouseParams.current.y = clientY;
             mouseParams.current.isActive = true;
         };
         const handleMouseLeave = () => {
             mouseParams.current.isActive = false;
         };
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchmove', handleMouseMove, { passive: true });
+        window.addEventListener('touchstart', handleMouseMove, { passive: true });
         document.body.addEventListener('mouseleave', handleMouseLeave);
+        window.addEventListener('touchend', handleMouseLeave);
 
         // Orbs definition
         const orbs = [
@@ -66,7 +79,7 @@ const AntigravityBackground: React.FC = () => {
 
         const render = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             // Draw deep space background
             ctx.fillStyle = '#050505';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -124,7 +137,10 @@ const AntigravityBackground: React.FC = () => {
         return () => {
             window.removeEventListener('resize', setCanvasSize);
             window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('touchmove', handleMouseMove);
+            window.removeEventListener('touchstart', handleMouseMove);
             document.body.removeEventListener('mouseleave', handleMouseLeave);
+            window.removeEventListener('touchend', handleMouseLeave);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
