@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useMemo, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
-    RobotIcon, ArrowUpIcon, LinkedInIcon, GitHubIcon, ThinkingIcon, SunIcon, MoonIcon
+    RobotIcon, ArrowUpIcon, LinkedInIcon, GitHubIcon, ThinkingIcon
 } from './components/Icons';
 import { SkillBadge, EducationCard, CertCard } from './components/ResumeComponents';
 import { hapticFeedback } from './utils';
@@ -102,7 +102,6 @@ function App() {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [chatOpen, setChatOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
-    const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
     // Form States
     const [formData, setFormData] = useState({ identifier: '', email: '', payload: '' });
@@ -148,10 +147,6 @@ function App() {
         };
     }, []);
 
-    useEffect(() => {
-        document.body.className = theme === 'light' ? 'light-theme' : '';
-    }, [theme]);
-
     const validateForm = () => {
         const errors = { identifier: '', email: '', payload: '' };
         let isValid = true;
@@ -171,11 +166,6 @@ function App() {
 
         setFormErrors(errors);
         return isValid;
-    };
-
-    const toggleTheme = () => {
-        hapticFeedback('medium');
-        setTheme(prev => prev === 'dark' ? 'light' : 'dark');
     };
 
     const handleSubmitForm = (e: React.FormEvent) => {
@@ -220,13 +210,6 @@ function App() {
                     <a href="#certs" onClick={() => hapticFeedback('light')}>Certs</a>
                     <a href="#projects" onClick={() => hapticFeedback('light')}>Vault</a>
                     <a href="#contact" onClick={() => hapticFeedback('light')}>Contact</a>
-                    <button
-                        onClick={toggleTheme}
-                        className="theme-toggle"
-                        style={{ background: 'none', border: 'none', color: 'var(--accent-cyan)', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center' }}
-                    >
-                        {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-                    </button>
                 </div>
             </header>
 
