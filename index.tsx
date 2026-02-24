@@ -8,7 +8,7 @@ import { SkillBadge, EducationCard, CertCard } from './components/ResumeComponen
 import { hapticFeedback } from './utils';
 
 // Lazy load heavy components
-const AntigravityBackground = lazy(() => import('./components/AntigravityBackground'));
+const ParticleNetworkBackground = lazy(() => import('./components/ParticleNetworkBackground'));
 const AIChat = lazy(() => import('./components/AIChat'));
 const ProjectVault = lazy(() => import('./components/ProjectVault'));
 const ProgressiveImage = lazy(() => import('./components/ProgressiveImage'));
@@ -226,7 +226,7 @@ function App() {
     return (
         <div className="portfolio-container">
             <Suspense fallback={<div className="bg-fallback" />}>
-                <AntigravityBackground />
+                <ParticleNetworkBackground />
             </Suspense>
 
             <header className="navbar">
