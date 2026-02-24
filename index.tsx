@@ -1,14 +1,14 @@
 
 import React, { useState, useEffect, useRef, useMemo, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
-import { 
+import {
     RobotIcon, ArrowUpIcon, LinkedInIcon, GitHubIcon, ThinkingIcon, SunIcon, MoonIcon
 } from './components/Icons';
 import { SkillBadge, EducationCard, CertCard } from './components/ResumeComponents';
 import { hapticFeedback } from './utils';
 
 // Lazy load heavy components
-const DottedGlowBackground = lazy(() => import('./components/DottedGlowBackground'));
+const AntigravityBackground = lazy(() => import('./components/AntigravityBackground'));
 const AIChat = lazy(() => import('./components/AIChat'));
 const ProjectVault = lazy(() => import('./components/ProjectVault'));
 const ProgressiveImage = lazy(() => import('./components/ProgressiveImage'));
@@ -23,20 +23,20 @@ const RESUME_DATA = {
         { title: "Web Developer (Intern)", company: "Digitaldict Technology Private Limited", duration: "Sep 2024 - Dec 2024", details: "Designed responsive websites using MERN stack, optimized performance, and collaborated with dev teams." }
     ],
     education: [
-        { 
-            degree: "Bachelor in Computer Science and Engineering", 
-            institution: "Parul university / Vadodara, Gujarat, India", 
-            duration: "September, 2021 - May, 2025" 
+        {
+            degree: "Bachelor in Computer Science and Engineering",
+            institution: "Parul university / Vadodara, Gujarat, India",
+            duration: "September, 2021 - May, 2025"
         },
-        { 
-            degree: "Diploma CSE", 
-            institution: "Invertis University / Bareilly, India", 
-            duration: "July, 2018 - September, 2021" 
+        {
+            degree: "Diploma CSE",
+            institution: "Invertis University / Bareilly, India",
+            duration: "July, 2018 - September, 2021"
         },
-        { 
-            degree: "High School", 
-            institution: "Shree Rastriya Secondary School / Ramgram-9-Karmaini, Nawalparasi, Nepal", 
-            duration: "May, 2017 - July, 2018" 
+        {
+            degree: "High School",
+            institution: "Shree Rastriya Secondary School / Ramgram-9-Karmaini, Nawalparasi, Nepal",
+            duration: "May, 2017 - July, 2018"
         }
     ],
     certifications: [
@@ -66,35 +66,35 @@ const RESUME_DATA = {
         }
     ],
     projects: [
-        { 
-            name: "KAAM LELO", 
-            type: "Job Seeker Platform", 
+        {
+            name: "KAAM LELO",
+            type: "Job Seeker Platform",
             details: "Database management and efficient website functionality.",
             techStack: ["React", "Node.js", "MongoDB", "Express", "REST API"],
             longDescription: "A robust recruitment portal designed to bridge the gap between skilled workers and employers. Features include real-time application tracking, automated profile matching, and an optimized dashboard for high-volume database operations."
         },
-        { 
-            name: "Guided Timer", 
-            type: "Health & Fitness App", 
+        {
+            name: "Guided Timer",
+            type: "Health & Fitness App",
             details: "An AI powered app for Guided Meditation, Breathing and more.",
             techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase", "PWA"],
             longDescription: "Guided Timer is a free, AI-powered app designed to elevate your sessions—whether it’s meditation, pomodoro, tabata, breathing exercises, workouts, study, yoga and more. Go beyond simple countdowns with customizable timers, immersive sound cues, haptic feedback, and on-screen guidance that keeps you in flow.",
             url: "https://guidedtimer.com"
         },
-        { 
-            name: "Restaurant Reservation", 
-            type: "Backend System", 
+        {
+            name: "Restaurant Reservation",
+            type: "Backend System",
             details: "Node/Express/MongoDB scalable server-side functionality.",
             techStack: ["Node.js", "Express", "MongoDB", "JWT Auth", "Cloudinary"],
             longDescription: "A highly scalable reservation system supporting multi-table booking, seat availability mapping, and secure transaction handling. Built with a modular architecture to handle peak traffic during festive seasons."
         }
     ],
-    contact: { 
-        email: "aryanhasmi0@gmail.com", 
-        phone: "+977 9707585123", 
+    contact: {
+        email: "aryanhasmi0@gmail.com",
+        phone: "+977 9707585123",
         location: "Palhinandan, Nawalparasi, Nepal",
-        linkedin: "aryanhasmi786", 
-        github: "Aryanhasmi" 
+        linkedin: "aryanhasmi786",
+        github: "Aryanhasmi"
     }
 };
 
@@ -103,12 +103,12 @@ function App() {
     const [chatOpen, setChatOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-    
+
     // Form States
     const [formData, setFormData] = useState({ identifier: '', email: '', payload: '' });
     const [formErrors, setFormErrors] = useState({ identifier: '', email: '', payload: '' });
     const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
-    
+
     // Animation States
     const [skillsVisible, setSkillsVisible] = useState(false);
     const [eduVisible, setEduVisible] = useState(false);
@@ -206,14 +206,9 @@ function App() {
     return (
         <div className="portfolio-container">
             <Suspense fallback={<div className="bg-fallback" />}>
-                <DottedGlowBackground 
-                    gap={40} 
-                    radius={1.5} 
-                    opacity={0.8}
-                    useRealisticColors={true}
-                />
+                <AntigravityBackground />
             </Suspense>
-            
+
             <header className="navbar">
                 <div className="logo" onClick={() => { hapticFeedback('light'); scrollHome(); }} style={{ cursor: 'pointer' }}>
                     A.HASMI<span>_</span>
@@ -225,8 +220,8 @@ function App() {
                     <a href="#certs" onClick={() => hapticFeedback('light')}>Certs</a>
                     <a href="#projects" onClick={() => hapticFeedback('light')}>Vault</a>
                     <a href="#contact" onClick={() => hapticFeedback('light')}>Contact</a>
-                    <button 
-                        onClick={toggleTheme} 
+                    <button
+                        onClick={toggleTheme}
                         className="theme-toggle"
                         style={{ background: 'none', border: 'none', color: 'var(--accent-cyan)', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center' }}
                     >
@@ -240,10 +235,10 @@ function App() {
                     <div className="profile-container" style={tiltStyle}>
                         <div className="profile-frame interactive-frame">
                             <Suspense fallback={<div className="profile-pic loading-blur" />}>
-                                <ProgressiveImage 
-                                    src="profile.png" 
+                                <ProgressiveImage
+                                    src="profile.png"
                                     placeholderSrc="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
-                                    alt="Aryan Hasmi" 
+                                    alt="Aryan Hasmi"
                                     className="profile-pic"
                                 />
                             </Suspense>
@@ -361,7 +356,7 @@ function App() {
                     <div className="line"></div>
                     <h2>COMMS_CHANNEL</h2>
                 </div>
-                
+
                 <div className="contact-grid">
                     <div className="contact-info">
                         <div className="info-card">
@@ -377,20 +372,20 @@ function App() {
                             <p>{RESUME_DATA.contact.phone}</p>
                         </div>
                         <div className="social-nodes">
-                            <a 
-                                href={`https://linkedin.com/in/${RESUME_DATA.contact.linkedin}`} 
-                                target="_blank" 
-                                rel="noreferrer" 
+                            <a
+                                href={`https://linkedin.com/in/${RESUME_DATA.contact.linkedin}`}
+                                target="_blank"
+                                rel="noreferrer"
                                 className="node"
                                 title="LinkedIn Profile"
                                 onClick={() => hapticFeedback('light')}
                             >
                                 <LinkedInIcon />
                             </a>
-                            <a 
-                                href={`https://github.com/${RESUME_DATA.contact.github}`} 
-                                target="_blank" 
-                                rel="noreferrer" 
+                            <a
+                                href={`https://github.com/${RESUME_DATA.contact.github}`}
+                                target="_blank"
+                                rel="noreferrer"
                                 className="node"
                                 title="GitHub Profile"
                                 onClick={() => hapticFeedback('light')}
@@ -414,34 +409,34 @@ function App() {
                         ) : (
                             <form className="cyber-form" onSubmit={handleSubmitForm} noValidate>
                                 <div className={`input-group ${formErrors.identifier ? 'has-error' : ''}`}>
-                                    <input 
-                                        type="text" 
-                                        placeholder="IDENTIFIER / Name" 
+                                    <input
+                                        type="text"
+                                        placeholder="IDENTIFIER / Name"
                                         value={formData.identifier}
-                                        onChange={(e) => setFormData({...formData, identifier: e.target.value})}
-                                        required 
+                                        onChange={(e) => setFormData({ ...formData, identifier: e.target.value })}
+                                        required
                                     />
                                     <div className="bar"></div>
                                     {formErrors.identifier && <span className="error-hint">{formErrors.identifier}</span>}
                                 </div>
                                 <div className={`input-group ${formErrors.email ? 'has-error' : ''}`}>
-                                    <input 
-                                        type="email" 
-                                        placeholder="RETURN_ADDR / Email" 
+                                    <input
+                                        type="email"
+                                        placeholder="RETURN_ADDR / Email"
                                         value={formData.email}
-                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                        required 
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        required
                                     />
                                     <div className="bar"></div>
                                     {formErrors.email && <span className="error-hint">{formErrors.email}</span>}
                                 </div>
                                 <div className={`input-group ${formErrors.payload ? 'has-error' : ''}`}>
-                                    <textarea 
-                                        placeholder="DATA_PAYLOAD / Message" 
-                                        rows={4} 
+                                    <textarea
+                                        placeholder="DATA_PAYLOAD / Message"
+                                        rows={4}
                                         value={formData.payload}
-                                        onChange={(e) => setFormData({...formData, payload: e.target.value})}
-                                        required 
+                                        onChange={(e) => setFormData({ ...formData, payload: e.target.value })}
+                                        required
                                     ></textarea>
                                     <div className="bar"></div>
                                     {formErrors.payload && <span className="error-hint">{formErrors.payload}</span>}
@@ -463,16 +458,16 @@ function App() {
 
             <Suspense fallback={null}>
                 {chatOpen && (
-                    <AIChat 
-                        isOpen={chatOpen} 
-                        onClose={() => setChatOpen(false)} 
-                        resumeData={RESUME_DATA} 
+                    <AIChat
+                        isOpen={chatOpen}
+                        onClose={() => setChatOpen(false)}
+                        resumeData={RESUME_DATA}
                     />
                 )}
             </Suspense>
 
-            <button 
-                className={`scroll-top-btn ${showScrollTop ? 'visible' : ''}`} 
+            <button
+                className={`scroll-top-btn ${showScrollTop ? 'visible' : ''}`}
                 onClick={() => { hapticFeedback('medium'); scrollHome(); }}
                 title="Scroll to Top"
             >
