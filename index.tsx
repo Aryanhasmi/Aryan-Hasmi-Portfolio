@@ -168,7 +168,7 @@ function App() {
         return isValid;
     };
 
-    const handleSubmitForm = (e: React.FormEvent) => {
+    const handleSubmitForm = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!validateForm()) {
             hapticFeedback('heavy');
@@ -177,10 +177,40 @@ function App() {
 
         hapticFeedback('medium');
         setFormStatus('sending');
-        setTimeout(() => {
-            hapticFeedback('light');
-            setFormStatus('sent');
-        }, 1500);
+
+        try {
+            const API_KEY = typeof process !== 'undefined' && process.env && process.env.VITE_WEB3FORMS_KEY
+                ? process.env.VITE_WEB3FORMS_KEY
+                : ((import.meta as any).env && (import.meta as any).env.VITE_WEB3FORMS_KEY);
+
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: API_KEY || "YOUR_ACCESS_KEY_HERE",
+                    name: formData.identifier,
+                    email: formData.email,
+                    message: formData.payload,
+                }),
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                hapticFeedback('light');
+                setFormStatus('sent');
+            } else {
+                hapticFeedback('heavy');
+                setFormStatus('idle');
+                alert("Transmission Failed. Invalid Access Key.");
+            }
+        } catch (error) {
+            hapticFeedback('heavy');
+            setFormStatus('idle');
+            alert("Network error during transmission.");
+        }
     };
 
     const scrollHome = () => {

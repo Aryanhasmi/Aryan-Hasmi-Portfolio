@@ -182,6 +182,8 @@ body {
 .btn-secondary {
     margin-left: 20px; color: var(--text-main); text-decoration: none; font-weight: 700;
     padding-bottom: 5px; border-bottom: 2px solid var(--accent-pink); transition: 0.3s;
+    background: transparent; border-top: none; border-left: none; border-right: none;
+    cursor: pointer; font-family: inherit; font-size: inherit; outline: none;
 }
 .btn-secondary:hover { color: var(--accent-pink); }
 
@@ -544,7 +546,7 @@ body {
 
 /* Footer */
 .footer { padding: 40px 10%; background: #080808; border-top: 1px solid var(--border-glass); }
-.copyright { text-align: center; color: #333; font-size: 0.7rem; font-family: var(--font-mono); }
+.copyright { text-align: center; color: var(--text-dim); font-size: 0.7rem; font-family: var(--font-mono); }
 
 .footer-tag {
     display: inline-block;
