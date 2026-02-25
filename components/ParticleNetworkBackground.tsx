@@ -1,8 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 
-const ParticleNetworkBackground: React.FC = () => {
+interface ParticleNetworkBackgroundProps {
+    theme?: 'light' | 'dark';
+}
+
+const ParticleNetworkBackground: React.FC<ParticleNetworkBackgroundProps> = ({ theme = 'dark' }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const mouseParams = useRef({ x: 0, y: 0, isActive: false });
+    const themeRef = useRef(theme);
+
+    useEffect(() => {
+        themeRef.current = theme;
+    }, [theme]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -45,7 +54,7 @@ const ParticleNetworkBackground: React.FC = () => {
 
         // Particle configuration
         const particleCount = Math.floor((window.innerWidth * window.innerHeight) / 15000); // Responsive count
-        const particles: { x: number, y: number, vx: number, vy: number, radius: number, color: string }[] = [];
+        const particles: { x: number, y: number, vx: number, vy: number, radius: number, isAccent: boolean }[] = [];
         const connectionDistance = 150;
         const mouseRepelDistance = 100;
 
@@ -56,15 +65,15 @@ const ParticleNetworkBackground: React.FC = () => {
                 vx: (Math.random() - 0.5) * 1, // Slow drift
                 vy: (Math.random() - 0.5) * 1,
                 radius: Math.random() * 2 + 1,
-                color: Math.random() > 0.5 ? 'rgba(0, 242, 255, 0.8)' : 'rgba(255, 255, 255, 0.6)'
+                isAccent: Math.random() > 0.5
             });
         }
 
         const render = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Deep space background
-            ctx.fillStyle = '#0a0a0f';
+
+            // Deep space background or light background
+            ctx.fillStyle = themeRef.current === 'dark' ? '#0a0a0f' : '#f0f0f5';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // Update and draw particles
@@ -76,12 +85,12 @@ const ParticleNetworkBackground: React.FC = () => {
                     const dx = p.x - mouseParams.current.x;
                     const dy = p.y - mouseParams.current.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    
+
                     if (distance < mouseRepelDistance) {
                         const forceDirectionX = dx / distance;
                         const forceDirectionY = dy / distance;
                         const force = (mouseRepelDistance - distance) / mouseRepelDistance;
-                        
+
                         // Push particles away smoothly
                         p.vx += forceDirectionX * force * 0.5;
                         p.vy += forceDirectionY * force * 0.5;
@@ -91,7 +100,7 @@ const ParticleNetworkBackground: React.FC = () => {
                 // Apply velocity and friction
                 p.x += p.vx;
                 p.y += p.vy;
-                
+
                 // Base floating movement + slight friction to limit speed from repel
                 p.vx = p.vx * 0.98 + (Math.random() - 0.5) * 0.05;
                 p.vy = p.vy * 0.98 + (Math.random() - 0.5) * 0.05;
@@ -107,7 +116,9 @@ const ParticleNetworkBackground: React.FC = () => {
                 // Draw Particle Node
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
+                ctx.fillStyle = p.isAccent
+                    ? (themeRef.current === 'dark' ? 'rgba(0, 242, 255, 0.8)' : 'rgba(0, 140, 148, 0.8)')
+                    : (themeRef.current === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(50, 50, 50, 0.4)');
                 ctx.fill();
 
                 // Draw connections
@@ -123,12 +134,14 @@ const ParticleNetworkBackground: React.FC = () => {
                         ctx.lineTo(p2.x, p2.y);
                         // Opacity based on distance
                         const opacity = 1 - (distance / connectionDistance);
-                        ctx.strokeStyle = `rgba(0, 242, 255, ${opacity * 0.3})`;
+                        ctx.strokeStyle = themeRef.current === 'dark'
+                            ? `rgba(0, 242, 255, ${opacity * 0.3})`
+                            : `rgba(0, 140, 148, ${opacity * 0.3})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
                 }
-                
+
                 // Draw connection to cursor
                 if (mouseParams.current.isActive) {
                     const dx = p.x - mouseParams.current.x;
@@ -139,7 +152,9 @@ const ParticleNetworkBackground: React.FC = () => {
                         ctx.moveTo(p.x, p.y);
                         ctx.lineTo(mouseParams.current.x, mouseParams.current.y);
                         const opacity = 1 - (distance / (connectionDistance * 1.5));
-                        ctx.strokeStyle = `rgba(181, 55, 242, ${opacity * 0.4})`; // Purple line to cursor
+                        ctx.strokeStyle = themeRef.current === 'dark'
+                            ? `rgba(181, 55, 242, ${opacity * 0.4})` // Purple
+                            : `rgba(212, 0, 167, ${opacity * 0.4})`; // Pink
                         ctx.lineWidth = 1;
                         ctx.stroke();
                     }

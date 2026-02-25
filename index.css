@@ -53,7 +53,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 5%;
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--panel-bg);
     backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid var(--border-glass);
@@ -222,7 +222,7 @@ body {
     position: absolute;
     bottom: -20px;
     right: -20px;
-    background: #000;
+    background: var(--bg-color);
     border: 1px solid var(--border-glass);
     padding: 8px 16px;
     border-radius: 50px;
@@ -276,7 +276,7 @@ body {
 
 .btn-primary {
     background: var(--accent-cyan);
-    color: #000;
+    color: var(--bg-color);
     border: none;
     padding: 16px 32px;
     border-radius: 5px;
@@ -655,7 +655,7 @@ body {
 .cert-card h4 {
     margin: 0 0 10px;
     font-size: 1.2rem;
-    color: #fff;
+    color: var(--text-main);
 }
 
 .cert-summary {
@@ -981,7 +981,7 @@ body {
     border: none;
     border-bottom: 1px solid var(--border-glass);
     padding: 15px 0;
-    color: #fff;
+    color: var(--text-main);
     font-family: var(--font-mono);
     font-size: 1rem;
     outline: none;
@@ -1037,7 +1037,7 @@ body {
     bottom: 0;
     width: 380px;
     height: 500px;
-    background: rgba(10, 10, 10, 0.95);
+    background: var(--panel-bg);
     border-left: 1px solid var(--border-glass);
     border-top: 1px solid var(--border-glass);
     z-index: 2000;
@@ -1062,7 +1062,7 @@ body {
 .chat-header button {
     background: none;
     border: none;
-    color: #fff;
+    color: var(--text-main);
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -1085,14 +1085,14 @@ body {
 }
 
 .msg.ai .msg-bubble {
-    background: #222;
+    background: var(--bg-color);
     border: 1px solid var(--border-glass);
     align-self: flex-start;
 }
 
 .msg.user .msg-bubble {
     background: var(--accent-cyan);
-    color: #000;
+    color: var(--bg-color);
     align-self: flex-end;
 }
 
@@ -1105,10 +1105,10 @@ body {
 
 .chat-input input {
     flex: 1;
-    background: #000;
+    background: var(--bg-color);
     border: 1px solid var(--border-glass);
     padding: 10px;
-    color: #fff;
+    color: var(--text-main);
     border-radius: 5px;
     outline: none;
 }
@@ -1131,6 +1131,7 @@ body {
     background: var(--accent-cyan);
     border: none;
     cursor: pointer;
+    color: var(--bg-color);
     box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
     z-index: 1500;
     display: flex;
@@ -1146,7 +1147,7 @@ body {
 /* Footer */
 .footer {
     padding: 40px 10%;
-    background: #080808;
+    background: var(--bg-color);
     border-top: 1px solid var(--border-glass);
 }
 

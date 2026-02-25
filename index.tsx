@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useMemo, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
-    RobotIcon, ArrowUpIcon, LinkedInIcon, GitHubIcon, ThinkingIcon
+    RobotIcon, ArrowUpIcon, LinkedInIcon, GitHubIcon, ThinkingIcon, SunIcon, MoonIcon
 } from './components/Icons';
 import { SkillBadge, EducationCard, CertCard } from './components/ResumeComponents';
 import { hapticFeedback } from './utils';
@@ -102,6 +102,7 @@ function App() {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [chatOpen, setChatOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
+    const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
     // Form States
     const [formData, setFormData] = useState({ identifier: '', email: '', payload: '' });
@@ -115,6 +116,14 @@ function App() {
     const skillsRef = useRef<HTMLDivElement>(null);
     const eduSectionRef = useRef<HTMLDivElement>(null);
     const certsSectionRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (theme === 'light') {
+            document.body.classList.add('light-theme');
+        } else {
+            document.body.classList.remove('light-theme');
+        }
+    }, [theme]);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -226,7 +235,7 @@ function App() {
     return (
         <div className="portfolio-container">
             <Suspense fallback={<div className="bg-fallback" />}>
-                <ParticleNetworkBackground />
+                <ParticleNetworkBackground theme={theme} />
             </Suspense>
 
             <header className="navbar">
@@ -240,6 +249,13 @@ function App() {
                     <a href="#certs" onClick={() => hapticFeedback('light')}>Certs</a>
                     <a href="#projects" onClick={() => hapticFeedback('light')}>Vault</a>
                     <a href="#contact" onClick={() => hapticFeedback('light')}>Contact</a>
+                    <button
+                        onClick={() => { hapticFeedback('medium'); setTheme(t => t === 'dark' ? 'light' : 'dark'); }}
+                        style={{ background: 'none', border: 'none', color: 'var(--text-dim)', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center' }}
+                        aria-label="Toggle Theme"
+                    >
+                        {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+                    </button>
                 </div>
             </header>
 
