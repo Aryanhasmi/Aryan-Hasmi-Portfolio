@@ -46,7 +46,7 @@ export const EducationCard: React.FC<{ edu: any; index: number; isVisible: boole
 
 export const CertCard: React.FC<{ cert: any; index: number; isVisible: boolean }> = ({ cert, index, isVisible }) => (
     <div
-        className={`cert-card ${isVisible ? 'animate-in' : ''} ${cert.link ? 'interactive-cert' : ''}`}
+        className={`cert-card ${isVisible ? 'animate-in' : ''} interactive-cert`}
         style={{ transitionDelay: `${index * 100}ms` }}
         onClick={() => cert.link && window.open(cert.link, '_blank', 'noopener,noreferrer')}
         role={cert.link ? "button" : undefined}
@@ -71,6 +71,6 @@ export const CertCard: React.FC<{ cert: any; index: number; isVisible: boolean }
                 <span className="verify-btn">Verify Credential ↗</span>
             </div>
         )}
-        {cert.link && <div className="cert-glow"></div>}
+        <div className="cert-glow"></div>
     </div>
 );
