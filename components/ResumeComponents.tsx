@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { 
+import {
     ReactIcon, NodeIcon, MongoDBIcon, FlutterIcon, NextjsIcon,
     ExpressIcon, JavaIcon, DartIcon, AIIcon, TerminalIcon, StackIcon, CodeIcon
 } from './Icons';
@@ -23,7 +23,7 @@ const getSkillIcon = (skill: string) => {
 };
 
 export const SkillBadge: React.FC<{ skill: string; index: number; isVisible: boolean }> = ({ skill, index, isVisible }) => (
-    <div 
+    <div
         className={`skill-badge ${isVisible ? 'animate-in' : ''}`}
         style={{ transitionDelay: `${index * 80}ms` }}
     >
@@ -33,7 +33,7 @@ export const SkillBadge: React.FC<{ skill: string; index: number; isVisible: boo
 );
 
 export const EducationCard: React.FC<{ edu: any; index: number; isVisible: boolean }> = ({ edu, index, isVisible }) => (
-    <div 
+    <div
         className={`education-card ${isVisible ? 'animate-in' : ''}`}
         style={{ transitionDelay: `${index * 150}ms` }}
     >
@@ -45,13 +45,19 @@ export const EducationCard: React.FC<{ edu: any; index: number; isVisible: boole
 );
 
 export const CertCard: React.FC<{ cert: any; index: number; isVisible: boolean }> = ({ cert, index, isVisible }) => (
-    <div 
-        className={`cert-card ${isVisible ? 'animate-in' : ''}`}
+    <div
+        className={`cert-card ${isVisible ? 'animate-in' : ''} ${cert.link ? 'interactive-cert' : ''}`}
         style={{ transitionDelay: `${index * 100}ms` }}
+        onClick={() => cert.link && window.open(cert.link, '_blank', 'noopener,noreferrer')}
+        role={cert.link ? "button" : undefined}
+        tabIndex={cert.link ? 0 : undefined}
     >
         <div className="cert-header">
             <span className="cert-date">{cert.date}</span>
-            <span className="cert-issuer">{cert.issuer}</span>
+            <span className="cert-issuer">
+                {cert.logo && <img src={cert.logo} alt={cert.issuer} className="cert-logo" />}
+                {cert.issuer}
+            </span>
         </div>
         <h4>{cert.name}</h4>
         <p className="cert-summary">{cert.details}</p>
@@ -60,5 +66,11 @@ export const CertCard: React.FC<{ cert: any; index: number; isVisible: boolean }
                 {cert.points.map((p: string, i: number) => <li key={i}>{p}</li>)}
             </ul>
         )}
+        {cert.link && (
+            <div className="cert-action">
+                <span className="verify-btn">Verify Credential ↗</span>
+            </div>
+        )}
+        {cert.link && <div className="cert-glow"></div>}
     </div>
 );

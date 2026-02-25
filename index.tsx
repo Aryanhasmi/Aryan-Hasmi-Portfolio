@@ -41,6 +41,22 @@ const RESUME_DATA = {
     ],
     certifications: [
         {
+            name: "AI Boost Bites: Automate tasks with Gemini and Apps Script",
+            issuer: "Google Skills",
+            date: "2025",
+            details: "Earned skill badge by demonstrating the ability to automate tasks using Google Gemini and Apps Script.",
+            link: "https://www.skills.google/public_profiles/0b01248e-85c6-4781-8a1c-6611a5f6304f/badges/21848750",
+            logo: "https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
+        },
+        {
+            name: "Machine Learning Operations (MLOps) for Generative AI",
+            issuer: "Google Skills",
+            date: "2025",
+            details: "Earned skill badge for Machine Learning Operations (MLOps) targeting Generative AI workflows.",
+            link: "https://www.skills.google/public_profiles/0b01248e-85c6-4781-8a1c-6611a5f6304f/badges/20789451",
+            logo: "https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
+        },
+        {
             name: "Google Startup School: Prompt to Prototype",
             issuer: "Google for Startups",
             date: "2025",
