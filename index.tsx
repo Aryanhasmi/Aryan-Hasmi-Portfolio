@@ -242,16 +242,18 @@ function App() {
                 <div className="logo" onClick={() => { hapticFeedback('light'); scrollHome(); }} style={{ cursor: 'pointer' }}>
                     A.HASMI<span>_</span>
                 </div>
-                <div className="nav-links">
-                    <a href="#about" onClick={() => hapticFeedback('light')}>About</a>
-                    <a href="#skills" onClick={() => hapticFeedback('light')}>Skills</a>
-                    <a href="#education" onClick={() => hapticFeedback('light')}>Education</a>
-                    <a href="#certs" onClick={() => hapticFeedback('light')}>Certs</a>
-                    <a href="#projects" onClick={() => hapticFeedback('light')}>Vault</a>
-                    <a href="#contact" onClick={() => hapticFeedback('light')}>Contact</a>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                    <div className="nav-links">
+                        <a href="#about" onClick={() => hapticFeedback('light')}>About</a>
+                        <a href="#skills" onClick={() => hapticFeedback('light')}>Skills</a>
+                        <a href="#education" onClick={() => hapticFeedback('light')}>Education</a>
+                        <a href="#certs" onClick={() => hapticFeedback('light')}>Certs</a>
+                        <a href="#projects" onClick={() => hapticFeedback('light')}>Vault</a>
+                        <a href="#contact" onClick={() => hapticFeedback('light')}>Contact</a>
+                    </div>
                     <button
                         onClick={() => { hapticFeedback('medium'); setTheme(t => t === 'dark' ? 'light' : 'dark'); }}
-                        style={{ background: 'none', border: 'none', color: 'var(--text-dim)', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center' }}
+                        style={{ background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', fontSize: '1.2rem', display: 'flex', alignItems: 'center' }}
                         aria-label="Toggle Theme"
                     >
                         {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
