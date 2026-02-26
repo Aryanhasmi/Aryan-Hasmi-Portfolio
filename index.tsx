@@ -118,7 +118,10 @@ function App() {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [chatOpen, setChatOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
-    const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+    const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        return (savedTheme as 'dark' | 'light') || 'light';
+    });
 
     // Form States
     const [formData, setFormData] = useState({ identifier: '', email: '', payload: '' });
@@ -139,6 +142,7 @@ function App() {
         } else {
             document.body.classList.remove('light-theme');
         }
+        localStorage.setItem('portfolio-theme', theme);
     }, [theme]);
 
     useEffect(() => {
