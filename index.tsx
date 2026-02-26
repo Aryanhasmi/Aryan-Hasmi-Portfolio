@@ -259,8 +259,8 @@ function App() {
             </Suspense>
 
             <header className="navbar">
-                <div className="logo" onClick={() => { hapticFeedback('light'); scrollHome(); }} style={{ cursor: 'pointer' }}>
-                    A.HASMI<span>_</span>
+                <div className="logo" onClick={() => { hapticFeedback('light'); scrollHome(); }} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                    <img src="aryan_logo.png" alt="Aryan Hasmi" style={{ height: '50px', width: 'auto' }} />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                     <div className="nav-links">
