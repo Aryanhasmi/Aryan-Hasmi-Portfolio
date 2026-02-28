@@ -74,14 +74,14 @@ const RESUME_DATA = {
             issuer: "Udemy",
             date: "2021",
             details: "Proficient in command-line terminal operations, validated by a Certificate of Completion from Udemy.",
-            link: "/certificates/internshipsem7.webp"
+            link: "/certificates/linuxcommandlinecertificate.webp"
         },
         {
             name: "Bootcamp: Netflix Clone",
             issuer: "Devtown",
             date: "2021",
             details: "Participated in a 7-day bootcamp on Netflix Clone development using HTML, CSS, and JavaScript in collaboration with Microsoft Learn and GDG Ranchi.",
-            link: "/certificates/internshipsem8.webp"
+            link: "/certificates/bootcampcertificate.webp"
         }
     ],
     projects: [
