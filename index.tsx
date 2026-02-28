@@ -41,6 +41,20 @@ const RESUME_DATA = {
     ],
     certifications: [
         {
+            name: "Web Developer Internship (8th Semester)",
+            issuer: "Digitaldict Technology Pvt. Ltd.",
+            date: "September 2024",
+            details: "Selected for the position of Web Developer based on skills demonstrated during the interview process. Responsibilities included designing, coding, and modifying websites from layout to function, striving to create visually appealing sites with user-friendly design, and developing applications using the latest web technologies.",
+            link: "/certificates/internshipsem8.webp"
+        },
+        {
+            name: "Web Developer Internship (7th Semester)",
+            issuer: "Digitaldict Technology Pvt. Ltd.",
+            date: "May 2024 - July 2024",
+            details: "Successfully completed the role of Web Developer. Demonstrated exceptional skills and dedication in designing and developing websites, ensuring responsive design, and optimizing website performance.",
+            link: "/certificates/internshipsem7.webp"
+        },
+        {
             name: "AI Boost Bites: Automate tasks with Gemini and Apps Script",
             issuer: "Google Skills",
             date: "2025",
