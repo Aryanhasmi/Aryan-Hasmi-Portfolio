@@ -61,6 +61,7 @@ const RESUME_DATA = {
             issuer: "Google for Startups",
             date: "2025",
             details: "Mastered Generative AI Integration, Prompt Engineering, Rapid Prototyping, and Strategic AI Application.",
+            link: "/certificates/googlestartupschool.webp",
             points: [
                 "Learned to leverage LLMs and Google’s AI tools to accelerate the product development lifecycle from initial concept to functional prototype.",
                 "Developed advanced skills in prompt engineering to automate workflows and generate high-quality code snippets.",
@@ -72,13 +73,15 @@ const RESUME_DATA = {
             name: "Linux Command Line Terminal",
             issuer: "Udemy",
             date: "2021",
-            details: "Proficient in command-line terminal operations, validated by a Certificate of Completion from Udemy."
+            details: "Proficient in command-line terminal operations, validated by a Certificate of Completion from Udemy.",
+            link: "/certificates/internshipsem7.webp"
         },
         {
             name: "Bootcamp: Netflix Clone",
             issuer: "Devtown",
             date: "2021",
-            details: "Participated in a 7-day bootcamp on Netflix Clone development using HTML, CSS, and JavaScript in collaboration with Microsoft Learn and GDG Ranchi."
+            details: "Participated in a 7-day bootcamp on Netflix Clone development using HTML, CSS, and JavaScript in collaboration with Microsoft Learn and GDG Ranchi.",
+            link: "/certificates/internshipsem8.webp"
         }
     ],
     projects: [
