@@ -21,7 +21,18 @@ const RESUME_DATA = {
     summary: "Passionate Software Engineering Enthusiast and Innovative Problem Solver. Keen observer, idea generator, and lifelong learner.",
     skills: ["MERN Stack", "React.js", "Next.js", "Flutter", "Dart", "Java", "Node.js", "Express.js", "MongoDB", "AI Automation", "Prompt Engineering"],
     experience: [
-        { title: "Web Developer (Intern)", company: "Digitaldict Technology Private Limited", duration: "Sep 2024 - Dec 2024", details: "Designed responsive websites using MERN stack, optimized performance, and collaborated with dev teams." }
+        {
+            title: "Web Developer (Intern)",
+            company: "Digitaldict Technology Private Limited",
+            duration: "Sep 2024 - Dec 2024",
+            details: "Designed responsive websites using MERN stack, optimized performance, and collaborated with dev teams."
+        },
+        {
+            title: "Web Developer (Intern)",
+            company: "Digitaldict Technology Pvt. Ltd.",
+            duration: "May 2024 - July 2024",
+            details: "Designed and developed responsive websites, ensuring optimal performance and exceptional user experience."
+        }
     ],
     education: [
         {
