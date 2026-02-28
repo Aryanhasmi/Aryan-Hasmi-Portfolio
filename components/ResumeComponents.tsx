@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import {
     ReactIcon, NodeIcon, MongoDBIcon, FlutterIcon, NextjsIcon,
     ExpressIcon, JavaIcon, DartIcon, AIIcon, TerminalIcon, StackIcon, CodeIcon
@@ -22,32 +23,41 @@ const getSkillIcon = (skill: string) => {
     }
 };
 
-export const SkillBadge: React.FC<{ skill: string; index: number; isVisible: boolean }> = ({ skill, index, isVisible }) => (
-    <div
-        className={`skill-badge ${isVisible ? 'animate-in' : ''}`}
-        style={{ transitionDelay: `${index * 80}ms` }}
+export const SkillBadge: React.FC<{ skill: string; index: number; isVisible: boolean }> = ({ skill, index }) => (
+    <motion.div
+        className="skill-badge"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5, delay: index * 0.05 }}
     >
         <span className="skill-tech-icon">{getSkillIcon(skill)}</span>
         {skill}
-    </div>
+    </motion.div>
 );
 
-export const EducationCard: React.FC<{ edu: any; index: number; isVisible: boolean }> = ({ edu, index, isVisible }) => (
-    <div
-        className={`education-card ${isVisible ? 'animate-in' : ''}`}
-        style={{ transitionDelay: `${index * 150}ms` }}
+export const EducationCard: React.FC<{ edu: any; index: number; isVisible: boolean }> = ({ edu, index }) => (
+    <motion.div
+        className="education-card"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, delay: index * 0.1 }}
     >
         <div className="edu-tag">{edu.duration}</div>
         <h3>{edu.degree}</h3>
         <p className="institution">{edu.institution}</p>
         <div className="edu-glow"></div>
-    </div>
+    </motion.div>
 );
 
-export const CertCard: React.FC<{ cert: any; index: number; isVisible: boolean }> = ({ cert, index, isVisible }) => (
-    <div
-        className={`cert-card ${isVisible ? 'animate-in' : ''} interactive-cert`}
-        style={{ transitionDelay: `${index * 100}ms` }}
+export const CertCard: React.FC<{ cert: any; index: number; isVisible: boolean }> = ({ cert, index }) => (
+    <motion.div
+        className="cert-card interactive-cert"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, delay: index * 0.1 }}
         onClick={() => cert.link && window.open(cert.link, '_blank', 'noopener,noreferrer')}
         role={cert.link ? "button" : undefined}
         tabIndex={cert.link ? 0 : undefined}
@@ -72,5 +82,5 @@ export const CertCard: React.FC<{ cert: any; index: number; isVisible: boolean }
             </div>
         )}
         <div className="cert-glow"></div>
-    </div>
+    </motion.div>
 );

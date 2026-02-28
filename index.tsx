@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef, useMemo, Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
+import { motion, useSpring, useTransform, useScroll } from 'framer-motion';
 import {
     RobotIcon, ArrowUpIcon, LinkedInIcon, GitHubIcon, ThinkingIcon, SunIcon, MoonIcon
 } from './components/Icons';
@@ -131,6 +132,41 @@ const RESUME_DATA = {
     }
 };
 
+
+const MagneticEffect: React.FC<{ children: React.ReactElement, intense?: boolean }> = ({ children, intense = false }) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
+        const { clientX, clientY } = e;
+        const { height, width, left, top } = ref.current!.getBoundingClientRect();
+        // Calculate distance FROM center of button TO cursor
+        const middleX = clientX - (left + width / 2);
+        const middleY = clientY - (top + height / 2);
+        // The previous factor calculation pushed them away, we want to pull them towards:
+        const factor = intense ? 0.3 : 0.15;
+        setPosition({ x: middleX * factor, y: middleY * factor });
+    };
+
+    const reset = () => {
+        setPosition({ x: 0, y: 0 });
+    };
+
+    const { x, y } = position;
+    return (
+        <motion.div
+            style={{ position: 'relative', display: 'inline-block' }}
+            ref={ref}
+            onMouseMove={handleMouse}
+            onMouseLeave={reset}
+            animate={{ x, y }}
+            transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
+        >
+            {children}
+        </motion.div>
+    );
+};
+
 function App() {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [chatOpen, setChatOpen] = useState(false);
@@ -144,14 +180,6 @@ function App() {
     const [formData, setFormData] = useState({ identifier: '', email: '', payload: '' });
     const [formErrors, setFormErrors] = useState({ identifier: '', email: '', payload: '' });
     const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
-
-    // Animation States
-    const [skillsVisible, setSkillsVisible] = useState(false);
-    const [eduVisible, setEduVisible] = useState(false);
-    const [certsVisible, setCertsVisible] = useState(false);
-    const skillsRef = useRef<HTMLDivElement>(null);
-    const eduSectionRef = useRef<HTMLDivElement>(null);
-    const certsSectionRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (theme === 'light') {
@@ -173,23 +201,9 @@ function App() {
         };
         window.addEventListener('scroll', handleScroll);
 
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.target === skillsRef.current && entry.isIntersecting) setSkillsVisible(true);
-                if (entry.target === eduSectionRef.current && entry.isIntersecting) setEduVisible(true);
-                if (entry.target === certsSectionRef.current && entry.isIntersecting) setCertsVisible(true);
-            });
-        }, observerOptions);
-
-        if (skillsRef.current) observer.observe(skillsRef.current);
-        if (eduSectionRef.current) observer.observe(eduSectionRef.current);
-        if (certsSectionRef.current) observer.observe(certsSectionRef.current);
-
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('scroll', handleScroll);
-            observer.disconnect();
         };
     }, []);
 
@@ -325,15 +339,34 @@ function App() {
 
                     <div className="intro-text">
                         <h2 className="glitch" data-text="ARYAN HASMI">ARYAN HASMI</h2>
-                        <h3 className="tagline">{RESUME_DATA.tagline}</h3>
-                        <p className="summary">{RESUME_DATA.summary}</p>
-                        <div className="hero-actions">
-                            <button className="btn-primary" onClick={() => { hapticFeedback('medium'); setChatOpen(true); }}>
-                                <RobotIcon /> A.AI
-                            </button>
-                            <a href="#contact" className="btn-secondary" onClick={() => hapticFeedback('light')}>
-                                HIRED_ME.EXE
-                            </a>
+                        <h3 className="tagline">
+                            <motion.span
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 1.5, ease: "easeOut" }}
+                            >
+                                {RESUME_DATA.tagline}
+                            </motion.span>
+                        </h3>
+                        <motion.p
+                            className="summary"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                        >
+                            {RESUME_DATA.summary}
+                        </motion.p>
+                        <div className="hero-actions" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                            <MagneticEffect intense>
+                                <button className="btn-primary" onClick={() => { hapticFeedback('medium'); setChatOpen(true); }} style={{ margin: 0 }}>
+                                    <RobotIcon /> A.AI
+                                </button>
+                            </MagneticEffect>
+                            <MagneticEffect>
+                                <a href="#contact" className="btn-secondary" onClick={() => hapticFeedback('light')} style={{ margin: 0 }}>
+                                    HIRED_ME.EXE
+                                </a>
+                            </MagneticEffect>
                         </div>
                     </div>
                 </div>
@@ -360,38 +393,38 @@ function App() {
                 </div>
             </section>
 
-            <section className="skills-section" id="skills" ref={skillsRef}>
+            <section className="skills-section" id="skills">
                 <div className="section-header">
                     <div className="line"></div>
                     <h2>COGNITIVE_STACK</h2>
                 </div>
                 <div className="skills-grid">
                     {RESUME_DATA.skills.map((s, idx) => (
-                        <SkillBadge key={s} skill={s} index={idx} isVisible={skillsVisible} />
+                        <SkillBadge key={s} skill={s} index={idx} isVisible={true} />
                     ))}
                 </div>
             </section>
 
-            <section className="education-section" id="education" ref={eduSectionRef}>
+            <section className="education-section" id="education">
                 <div className="section-header">
                     <div className="line"></div>
                     <h2>ACADEMIC_PATH</h2>
                 </div>
                 <div className="education-grid">
                     {RESUME_DATA.education.map((edu, idx) => (
-                        <EducationCard key={edu.degree} edu={edu} index={idx} isVisible={eduVisible} />
+                        <EducationCard key={edu.degree} edu={edu} index={idx} isVisible={true} />
                     ))}
                 </div>
             </section>
 
-            <section className="certs-section" id="certs" ref={certsSectionRef}>
+            <section className="certs-section" id="certs">
                 <div className="section-header">
                     <div className="line"></div>
                     <h2>CERT_VALIDATION_PROTOCOL</h2>
                 </div>
                 <div className="certs-grid">
                     {RESUME_DATA.certifications.map((cert, idx) => (
-                        <CertCard key={idx} cert={cert} index={idx} isVisible={certsVisible} />
+                        <CertCard key={idx} cert={cert} index={idx} isVisible={true} />
                     ))}
                 </div>
             </section>
@@ -406,15 +439,33 @@ function App() {
                     <h2>HISTORY_LOG</h2>
                 </div>
                 <div className="timeline">
-                    {RESUME_DATA.experience.map(exp => (
-                        <div className="timeline-item" key={exp.company}>
+                    {/* Animated vertical track */}
+                    <div className="timeline-track">
+                        <motion.div
+                            className="timeline-progress"
+                            initial={{ height: 0 }}
+                            whileInView={{ height: '100%' }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 1.5, ease: "easeInOut" }}
+                        />
+                    </div>
+
+                    {RESUME_DATA.experience.map((exp, idx) => (
+                        <motion.div
+                            className="timeline-item"
+                            key={exp.company}
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, delay: idx * 0.2 }}
+                        >
                             <div className="timeline-marker"></div>
                             <div className="timeline-content">
                                 <h4>{exp.title} @ {exp.company}</h4>
                                 <p className="time">{exp.duration}</p>
                                 <p>{exp.details}</p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </section>
