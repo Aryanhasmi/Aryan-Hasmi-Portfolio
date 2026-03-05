@@ -329,7 +329,7 @@ function App() {
                         <div className="profile-frame interactive-frame">
                             <Suspense fallback={<div className="profile-pic loading-blur" />}>
                                 <ProgressiveImage
-                                    src="profile.png"
+                                    src="profile.webp"
                                     placeholderSrc="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
                                     alt="Aryan Hasmi"
                                     className="profile-pic"
